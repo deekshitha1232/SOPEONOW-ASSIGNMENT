@@ -1,0 +1,523 @@
+{% load static %}
+{% load time_filters %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+
+<div class="navbar">
+
+    <!-- LEFT -->
+    <div class="nav-left">
+
+        <!-- MENU ICON -->
+        <i class="bi bi-list menu-icon"></i>
+
+       
+        <div class="logo-box">
+            <img src="{% static 'images/sn-logo.jpg' %}" alt="SN Logo">
+        </div>
+
+      
+        <div class="app-title">Management Live</div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="nav-right">
+
+        <div class="nav-link">
+            <i class="bi bi-house-door-fill"></i>
+            <span>Home</span>
+        </div>
+
+        <div class="nav-link">
+            <i class="bi bi-person-badge-fill"></i>
+            <span>Admissions</span>
+            <i class="bi bi-caret-down-fill small"></i>
+        </div>
+
+        <!-- USER -->
+        <div class="user-badge">AB</div>
+
+    </div>
+
+</div>
+
+<!-- ===== MAIN LAYOUT ===== -->
+<div class="main">
+
+  
+
+<div class="sidebar">
+
+    <!-- 1 SEARCH -->
+    <div class="menu-item">
+        <i class="bi bi-search"></i>
+    </div>
+
+    <!-- 2 FILTER -->
+    <div class="menu-item">
+        <i class="bi bi-funnel-fill"></i>
+    </div>
+
+    <!-- 3 TABLE -->
+    <div class="menu-item">
+        <i class="bi bi-table"></i>
+    </div>
+
+    <div class="menu-item">
+        <span class="material-symbols-outlined">medical_services</span>
+    </div>
+
+    
+    <div class="menu-item">
+        <span class="material-symbols-outlined">emergency</span>
+    </div>
+
+    
+    <div class="menu-item">
+        <i class="bi bi-file-earmark-medical"></i>
+    </div>
+
+    
+    <div class="menu-item">
+        <i class="bi bi-clipboard-data"></i>
+    </div>
+
+    <div class="menu-item">
+        <i class="bi bi-house"></i>
+    </div>
+
+    <div class="menu-item">
+        <i class="bi bi-lock"></i>
+    </div>
+
+   
+    <div class="menu-item">
+        <i class="bi bi-globe"></i>
+    </div>
+
+    <div class="menu-item">
+        <span class="material-symbols-outlined">account_tree</span>
+    </div>
+
+   
+    <div class="menu-item">
+        <i class="bi bi-arrow-repeat"></i>
+    </div>
+
+    <div class="menu-item active">
+        <i class="bi bi-bar-chart-fill"></i>
+    </div>
+
+</div>
+    
+    <div class="metrics">
+
+    <div class="metrics-header">Key Metrics</div>
+
+    <!-- Registration -->
+    <div class="metric-row">
+        <div class="left">
+            <div class="label">Queue to Registration</div>
+            <div class="title">Registration Time</div>
+        </div>
+        <div class="right red">
+            <i class="bi bi-clock"></i>
+            {{ key_metrics.registration.time|seconds_to_hhmm }}
+        </div>
+    </div>
+
+    <!-- Triage -->
+    <div class="metric-row">
+        <div class="left">
+            <div class="label">Registration to Triage</div>
+            <div class="title">Time to Triage</div>
+        </div>
+        <div class="right green">
+            <i class="bi bi-clock"></i>
+            {{ key_metrics.triage_done.time|seconds_to_hhmm }}
+        </div>
+    </div>
+
+    <!-- Consult -->
+    <div class="metric-row">
+        <div class="left">
+            <div class="label">Triage to Consult</div>
+            <div class="title">Time to Consult</div>
+        </div>
+        <div class="right green">
+            <i class="bi bi-clock"></i>
+            {{ key_metrics.cons_done.time|seconds_to_hhmm }}
+        </div>
+    </div>
+
+    <!-- Zone -->
+    <div class="metric-row">
+        <div class="left">
+            <div class="label">Triage Till Discharge</div>
+            <div class="title">In Zone Time</div>
+        </div>
+        <div class="right red">
+            <i class="bi bi-clock"></i>
+            {{ key_metrics.in_zone.time|seconds_to_hhmm }}
+        </div>
+    </div>
+
+    <!-- Treatment -->
+    <div class="metric-row">
+        <div class="left">
+            <div class="label">Consultation to Discharge</div>
+            <div class="title">Treatment Time</div>
+        </div>
+        <div class="right red">
+            <i class="bi bi-clock"></i>
+            {{ key_metrics.treatment.time|seconds_to_hhmm }}
+        </div>
+    </div>
+
+    <!-- Lab -->
+    <div class="metric-row">
+        <div class="left">
+            <div class="label">Lab Order Requesting Time</div>
+            <div class="title">Lab Processing Time</div>
+        </div>
+        <div class="right red">
+            <i class="bi bi-clock"></i>
+            {{ key_metrics.treatment.time|seconds_to_hhmm }}
+        </div>
+    </div>
+
+    <!-- Radiology -->
+    <div class="metric-row">
+        <div class="left">
+            <div class="label">Radiology Order Requesting Time</div>
+            <div class="title">Radiology Processing Time</div>
+        </div>
+        <div class="right red">
+            <i class="bi bi-clock"></i>
+            {{ key_metrics.treatment.time|seconds_to_hhmm }}
+        </div>
+    </div>
+
+    <!-- IP Transfers -->
+    <div class="metric-row">
+        <div class="left">
+            <div class="label">UCC Discharge to IP Bed Allotment</div>
+            <div class="title">IP Transfers</div>
+        </div>
+
+        <div class="ip-right">
+            <span class="count">
+                <i class="bi bi-person-fill"></i>
+                {{ key_metrics.ip_transfers.completed.count }}
+            </span>
+
+            <span class="time green">
+                <i class="bi bi-clock"></i>
+                {{ key_metrics.ip_transfers.completed.time|seconds_to_hhmm }}
+            </span>
+        </div>
+    </div>
+
+<div class="summary-card">
+
+    <!-- LEFT -->
+    <div class="summary-left">
+        <div class="summary-title">Total Visits</div>
+        <div class="summary-value">
+            {{ key_metrics.total.count }}
+        </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="summary-right">
+        <div class="summary-title small">
+            Visit Time <span>(Registration to Discharge)</span>
+        </div>
+        <div class="summary-time red">
+            <i class="bi bi-clock"></i>
+            {{ completed.avg_act_tm|seconds_to_hhmm }}
+        </div>
+    </div>
+
+</div>
+
+
+<div class="mini-metrics">
+
+    <!-- INSURANCE -->
+    <div class="mini-card">
+        <div class="mini-title">Insurance</div>
+        <div class="mini-row">
+            <span class="count">
+                {{ completed.Payor.Insurance.count }}
+            </span>
+            <span class="time green">
+                {{ completed.Payor.Insurance.time|seconds_to_hhmm }}
+            </span>
+        </div>
+    </div>
+
+    <!-- SELF PAY -->
+    <div class="mini-card">
+        <div class="mini-title">Self Pay</div>
+        <div class="mini-row">
+            <span class="count">
+                {{ completed.Payor.Self_Pay.count }}
+            </span>
+            <span class="time red">
+                {{ completed.Payor.Self_Pay.time|seconds_to_hhmm }}
+            </span>
+        </div>
+    </div>
+
+    <!-- INTERNATIONAL -->
+    <div class="mini-card">
+        <div class="mini-title">International</div>
+        <div class="mini-row">
+            <span class="count">
+                {{ completed.Residency.International.count }}
+            </span>
+            <span class="time red">
+                {{ completed.Residency.International.time|seconds_to_hhmm }}
+            </span>
+        </div>
+    </div>
+
+    <!-- LOCAL -->
+    <div class="mini-card">
+        <div class="mini-title">Local</div>
+        <div class="mini-row">
+            <span class="count">
+                {{ completed.Residency.Local.count }}
+            </span>
+            <span class="time green">
+                {{ completed.Residency.Local.time|seconds_to_hhmm }}
+            </span>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<div>
+  
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- TOP -->
+        <div class="topr">
+
+            <!-- LEFT -->
+            <div class="left-section">
+
+                <div class="zone-header">
+                    <div class="zone-title">Zone Statistics</div>
+                    <span class="green">Green Zone</span>
+                    <span class="yellow">Yellow Zone</span>
+                    <span class="red">Red Zone</span>
+                </div>
+
+                <div class="zone-table">
+
+                    <div class="a"><i class="bi bi-people-fill"></i> Total Visits</div>
+                    <div class="g">{{ zonestats.green.total_visits_count }}</div>
+                    <div class="y">{{ zonestats.yellow.total_visits_count }}</div>
+                    <div class="r">{{ zonestats.red.total_visits_count }}</div>
+
+                    <div class="a"> <i class="bi bi-person-check"></i>Active</div>
+                    <div class="g">{{ zonestats.green.active_count }}</div>
+                    <div class="y">{{ zonestats.yellow.active_count }}</div>
+                    <div class="r">{{ zonestats.red.active_count }}</div>
+
+                    <div class="a"><i class="bi bi-box-arrow-right"></i>Discharged</div>
+                    <div class="g">{{ zonestats.green.discharge_count }}</div>
+                    <div class="y">{{ zonestats.yellow.discharge_count }}</div>
+                    <div class="r">{{ zonestats.red.discharge_count }}</div>
+
+                    <div class="a"><i class="bi bi-clock"></i> Avg Triage Time</div>
+                    <div class="g">{{ zonestats.green.avg_triage_tm|seconds_to_hhmm }}</div>
+                    <div class="y">{{ zonestats.yellow.avg_triage_tm|seconds_to_hhmm }}</div>
+                    <div class="r">{{ zonestats.red.avg_triage_tm|seconds_to_hhmm }}</div>
+
+                    <div class="a"><i class="bi bi-hourglass-split"></i> Avg Hold Time</div>
+                    <div class="g">{{ zonestats.green.avg_zone_tm|seconds_to_hhmm }}</div>
+                    <div class="y">{{ zonestats.yellow.avg_zone_tm|seconds_to_hhmm }}</div>
+                    <div class="r">{{ zonestats.red.avg_zone_tm|seconds_to_hhmm }}</div>
+
+                    <div class="a"><i class="bi bi-stopwatch"></i>Avg Visit Time</div>
+                    <div class="g">{{ zonestats.green.avg_visit_tm|seconds_to_hhmm }}</div>
+                    <div class="y">{{ zonestats.yellow.avg_visit_tm|seconds_to_hhmm }}</div>
+                    <div class="r">{{ zonestats.red.avg_visit_tm|seconds_to_hhmm }}</div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT (TRIAGE CHART) -->
+            <div class="right-section card">
+                <div class="chart-title">
+                    Triage by <span>Interval</span>
+                </div>
+                <div id="chart4"></div>
+            </div>
+
+        </div>
+
+        <!-- CHARTS ROW -->
+        <div class="charts">
+
+            <div class="card">
+                <div class="chart-title">
+                    Triage by <span>zone</span>
+                </div>
+                <div id="chart1"></div>
+            </div>
+
+            <div class="card">
+                <div class="chart-title">
+                    Patients by <span>Interval</span>
+                </div>
+                <div id="chart2"></div>
+            </div>
+
+            <div class="card">
+                <div class="chart-title">
+                    Patients by <span>Doctor</span>
+                </div>
+                <div id="chart3"></div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM -->
+        <div class="bottom">
+
+            <!-- WAITING -->
+             <div class="waiting card">
+
+    <h4>Current <span>Waiting Status</span></h4>
+
+    <div class="waiting-body">
+        <div class="waiting-time">
+            <i class="bi bi-clock"></i>
+            
+        </div>
+        <!-- BIG ICON CENTER -->
+        <span class="material-symbols-outlined waiting-icon">
+            airline_seat_recline_normal
+        </span>
+
+        <!-- TIME BELOW -->
+        
+
+    </div>
+
+</div>
+ 
+            <div class="triage-consult">
+
+    <!-- TRIAGE -->
+    <div class="triage-box">
+        <div class="box-header">
+            <i class="bi bi-person-check-fill"></i>
+            <span>For Triage</span>
+        </div>
+
+        <div class="box-body">
+            <div class="left">
+                <i class="bi bi-person"></i>
+                <span class="count">
+                    {{ inprogress.pdTriage.count }}
+                </span>
+            </div>
+
+            <div class="right red">
+                <i class="bi bi-clock"></i>
+                <span>
+                   {{ inprogress.pdTriage.time|div:inprogress.pdTriage.count|seconds_to_hhmm }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONSULT -->
+    <div class="triage-box consult">
+        <div class="box-header">
+            <i class="bi bi-person-lines-fill"></i>
+            <span>For Consultation</span>
+        </div>
+
+        <div class="box-body">
+            <div class="left">
+                <i class="bi bi-person"></i>
+                <span class="count">
+                    {{ inprogress.pdConsultation.count }}
+                </span>
+            </div>
+
+            <div class="right green">
+                <i class="bi bi-clock"></i>
+                <span>
+                   {{ inprogress.pdConsultation.time|div:inprogress.pdConsultation.count|seconds_to_hhmm }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+             <div class="card doctor-table-card">
+
+    <div class="doctor-header">
+        <h4>Doctor Statistics</h4>
+        <input type="text" id="searchInput" placeholder="Search here...">
+    </div>
+
+    <table id="doctorTable">
+        <thead>
+            <tr>
+                <th>Doctor</th>
+                <th>Patients</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+  <div class="pagination"></div>
+
+</div>
+            <!-- DOCTOR TABLE -->
+            
+            
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- JSON -->
+{{ jsonData|json_script:"jsonData" }}
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="{% static 'reporting.js' %}"></script>
+
+</body>
+</html> 
