@@ -133,7 +133,7 @@ SECRET_KEY = 'django-insecure-your-key'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["sopeonow-assignment-1.onrender.com"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
