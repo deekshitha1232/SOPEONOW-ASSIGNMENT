@@ -136,7 +136,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 SECRET_KEY = 'django-insecure-your-key'
 
 DEBUG = False
-ALLOWED_HOSTS = ["sopeonow-assignment-1.onrender.com", ".onrender.com"]
+ALLOWED_HOSTS = ["*"]
 
 # ALLOWED_HOSTS = ["sopeonow-assignment-1.onrender.com"]
 
