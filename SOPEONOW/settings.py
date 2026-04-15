@@ -131,7 +131,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 SECRET_KEY = 'django-insecure-your-key'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["sopeonow-assignment-1.onrender.com"]
 
