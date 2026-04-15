@@ -126,6 +126,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Static
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [BASE_DIR / 'static']
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -134,7 +137,8 @@ SECRET_KEY = 'django-insecure-your-key'
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["https://sopeonow-assignment-1.onrender.com"]
+
+ALLOWED_HOSTS = ["sopeonow-assignment-1.onrender.com"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
